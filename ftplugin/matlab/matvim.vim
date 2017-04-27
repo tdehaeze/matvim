@@ -93,9 +93,9 @@ command! MatlabStart :call MatlabStart()
 command! MatlabFind :echo MatlabFind()
 command! -nargs=? -complete=customlist,MatlabFind MatlabConnect :call MatlabConnect(<f-args>)
 
-nmap <buffer>,m :call MatlabRunCommand() <cr>
-nmap <buffer>,l :call MatlabRunLine() <cr>
-nmap <buffer>,r :call MatlabRunFile() <cr>
-vmap <buffer>,s :call MatlabRunSelection() <cr>
-nmap <buffer>,s :call MatlabRunSection() <cr>
-nmap <buffer>,v :call MatlabShowVariable() <cr>
+nmap <buffer>,mc :call MatlabRunCommand() <cr>
+nmap <buffer>,ml :call MatlabRunLine() <cr>
+nmap <buffer>,mf :call MatlabRunFile() <cr>
+vmap <buffer>,ms :call MatlabRunSelection() <cr>
+nmap <buffer>,ms :call MatlabRunSection() <cr>
+nmap <buffer>,mv :call MatlabShowVariable() <cr>
