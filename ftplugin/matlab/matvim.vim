@@ -16,78 +16,78 @@ if !exists('g:matvim_max_outputchars')
     let g:matvim_max_outputchars = -1
 endif
 
-" load python module
+" load python3 module
 
-python import vim
-python import sys
-python sys.path.append(vim.eval('expand("<sfile>:h")'))
-python import matvim
+python3 import vim
+python3 import sys
+python3 sys.path.append(vim.eval('expand("<sfile>:h")'))
+python3 import matvim
 
 " bold cell titles
 
 highlight MATCELL cterm=bold term=bold gui=bold
 match MATCELL /^%%[^%]*$/
 
-" python wrappers
+" python3 wrappers
 
 function! MatlabStart()
-python matvim.startMatlab()
+python3 matvim.startMatlab()
 endfunction
 
 function! MatlabConnect(...)
     if a:0 == 0
-        python matvim.connectMatlab()
+        python3 matvim.connectMatlab()
     elseif a:0 == 1
-        python matvim.connectMatlab(vim.eval('a:1'))
+        python3 matvim.connectMatlab(vim.eval('a:1'))
     endif
 endfunction
 
 function! MatlabFind(...)
-python matvim.findMatlab()
+python3 matvim.findMatlab()
 endfunction
 
 function! MatlabRunLine()
-python matvim.runLine()
+python3 matvim.runLine()
 endfunction
 
 function! MatlabRunFile()
-python matvim.runFile()
+python3 matvim.runFile()
 endfunction
 
 function! MatlabRunSelection() range
-python matvim.runSelection()
+python3 matvim.runSelection()
 endfunction
 
 function! MatlabRunSection()
-python matvim.runSection()
+python3 matvim.runSection()
 endfunction
 
 function! MatlabShowVariable()
-python matvim.showVariable()
+python3 matvim.showVariable()
 endfunction
 
 function! MatlabRunCommand(...)
     if a:0 == 0
         let commandstr = input('>> ')
         echo ' '
-        python matvim.runCommand(vim.eval('commandstr'))
+        python3 matvim.runCommand(vim.eval('commandstr'))
     elseif a:0 == 1
-        python matvim.runCommand(vim.eval('a:1'))
+        python3 matvim.runCommand(vim.eval('a:1'))
     endif
 endfunction
 
 " Initialize engine
 
 if g:matvim_auto_connect && !g:matvim_auto_start
-    python matvim.connectMatlab()
+    python3 matvim.connectMatlab()
 endif
 
 if g:matvim_auto_start && !g:matvim_auto_connect
-    python matvim.startMatlab()
+    python3 matvim.startMatlab()
 endif
 
 if g:matvim_auto_connect && g:matvim_auto_start
-    python matvim.connectOrStartMatlab()
+    python3 matvim.connectOrStartMatlab()
 endif
 
 " shortcuts and commands

@@ -1,6 +1,6 @@
 import matlab.engine
 import vim
-import StringIO
+import io
 from os import remove
 
 engine = None
@@ -18,10 +18,10 @@ def connectMatlab(sessionID=None):
         if runningEngines:
             engine = matlab.engine.connect_matlab(runningEngines[0])
         else:
-            print "No active Matlab engines found"
+            print("No active Matlab engines found")
     if sessionID:
         if sessionID not in runningEngines:
-            print "No matlab engine named %s is active"%sessionID
+            print("No matlab engine named %s is active"%sessionID)
         else:
             engine = matlab.engine.connect_matlab(sessionID)
 
@@ -44,7 +44,7 @@ def quitMatlab():
 
 def execute(lines):
     if type(engine)!=matlab.engine.matlabengine.MatlabEngine:
-        print "I do not find a matlab engine"
+        print("I do not find a matlab engine")
         return
     oldworkingdir = engine.pwd()
     workingdir = vim.eval("expand('%:p:h')")
@@ -52,7 +52,7 @@ def execute(lines):
     with open(fscript,'w') as script:
         for line in lines:
             script.write(line+'\n')
-    result = StringIO.StringIO()
+    result = io.StringIO()
     engine.cd(workingdir,nargout=0)
     try:
         engine.tmpscriptAZWKL(nargout=0,stdout=result,stderr=result)
